@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booked Trip Form</title>
+    <link rel='stylesheet' href="{% static 'bootstrap\css\bootstrap.css' %}"/>
+    <script src="{% static 'bootstrap\js\jquery.js' %}"></script>
+    <script src="{% static 'bootstrap\js\bootstrap.js' %}"  ></script>
+    <script src="{% static 'bootstrap\js\bootstrap.bundle.js' %}"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Kalam&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            
+        }
+        body, html {
+            height: 100%;
+          }
+          
+        .parallax {    
+            background-image: url('/static/background_images/sunset.jpg');
+            height: 100%; 
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        } 
+    
+        .block{
+            position:absolute;
+            top:10%;
+            left:22%;
+            width:60%;
+            text-align:center;
+           
+        }
+    
+        label{
+            width: 40%;
+            background-color:rgb(219, 66, 10);
+            text-align: center;
+            padding: 5px;
+            font-family:'Kalam', cursive;;
+        }
+            
+        .title{
+            text-align: center;
+            font-family:'Times New Roman', Times, serif;
+            color: white;
+            padding: 5px;
+            background-color: rgb(209, 35, 35);
+            border: 2px solid rgb(209, 35, 35);
+            margin: 0;
+            }
+    
+        span{
+            background-color:navy;
+            text-align: center;
+            padding: 5px;
+            display: inline-block;
+            width: 59%;
+            font-family:'Times New Roman', Times, serif;
+        }
+    
+        h5{
+             margin: 0;
+        }
+    </style>
+
+</head>
+<body>
+    <div style="position: fixed;right:2%;top:20%;">
+        <h1><a class="btn btn-primary" href="/" >Home</a></h1><!--------home------->
+    </div>    
+     
+    <div class="img-fluid parallax"></div>
+
+    <div class=' jumbotron bg-dark block' >
+        <div class="display-4" style="color: chartreuse;position:absolute;left:24%;top:0">
+            {% for message in messages %}
+            <h3>{{message}}</h3>
+            {% endfor %}
+        </div>
+        <h1 class=" title"  ><b>Travells Booked Form</b></h1>
+        <div class="container text-justify " style="border:2px solid rgb(209, 35, 35);margin:0" >
+                        
+            <div ><br/>
+                <h5 class=" text-white " ><label>Tour place</label>:<span  >{{spot}}</span></h5>
+
+                <h5 class=" text-white " ><label>NAME</label>:<span >{{user.first_name}} {{user.last_name}}</span></h5>
+            
+                <h5 class=" text-white " ><label>EMAIL</label>:<span > {{user.email}}</span></h5>
+
+                <h5 class=" text-white " ><label>Mobile</label>:<span >{{phone}} </span></h5>
+
+                <h5 class=" text-white " ><label>Total-passengers</label>:<span >{{passengers}} </span></h5>
+
+                <h5 class=" text-white " ><label>Travelling date</label>:<span >{{date}}</span></h5>
+
+                <h5 class=" text-white " ><label>Your-city</label>:<span > {{city}}</span></h5>
+
+                <h5 class=" text-white " ><label>Pickup-Address</label>:<span >{{address}} </span></h5>
+
+                <h5 class=" text-white " ><label>Vehicle</label>:<span > {{vehicle}}</span></h5>
+
+                <h5 class=" text-white " ><label>Drop-Address</label>:<span > Hayatt hotel,banjara hills,room-05</span></h5>
+            </div>
+
+            <div class="container bg-info">       
+                <p class="text-white text-justify " id="para" style="padding: 5px;  font-family:'Kalam', cursive;;;font-size:16px;"><b class="text-warning"> NOTE:</b>Enjoy the new experience.In the middle of journey we will show you al the important places and
+                    provide all the stuff you needed for shoot and food.we also preparing a food having menu both veg and non veg items.
+                    we hope you enjoy this.all d best.
+                </p>
+            </div>     
+        </div>
+        
+        <footer class=" title"><b>&copy;Bejj Travells </b></footer>
+    </div>
+
+    <div class="img-fluid parallax" ></div>
+
+    <div style="position: absolute; font-family: 'Kalam', cursive;;color:white;left:36%;margin-top:10%;" >
+        <h1  class="display-1" >The Bejj</h1>
+    </div>
+
+    <div class="img-fluid parallax" ></div>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel='stylesheet' href="{% static 'bootstrap\css\bootstrap.css' %}"/>
+  <script src="{% static 'bootstrap\js\jquery.js' %}"></script>
+  <script src="{% static 'bootstrap\js\bootstrap.js' %}"  ></script>
+  <script src="{% static 'bootstrap\js\bootstrap.bundle.js' %}"></script>
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Kalam&display=swap" rel="stylesheet">
+  <style>
+    body,html{
+      height: 100%;
+          }
+          
+    .parallax {
+          background-image:  url('/static/background_images/black.jpg');
+          height: 100%; 
+          background-attachment: fixed;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;  
+        }
+        
+    .form-group input{
+          font-size: large;
+          font-weight: bolder;
+          color: red;
+        }
+
+    .title{
+        border:3px solid  rgb(235, 48, 48);
+        padding:2px;
+        background-color:rgb(235, 48, 48);
+        text-align: center;
+    }
+
+    .block{
+       position:absolute;width:50% ;top:10%;left:25%;border:3px solid rgb(235, 48, 48);color: white;
+    }
+
+  </style>
+
+  <script >
+    function valid_pass(){
+      var pass1=document.form1.pwd1.value;
+      var pass2=document.form1.pwd2.value;
+      var first_name=document.form1.First.value;
+      var last_name=document.form1.Last.value;
+      var cur_date=new Date();
+      var new_date=new Date(document.form1.dob.value);
+      var number=document.form1.num.value;
+      
+      if (first_name=='' || last_name==''){
+        alert('Name is mandatory..');
+        return false
+          }
+      if (pass1.length<6){
+        window.alert('Password must atleast 6 char...');
+        return false
+      }
+      if (pass1!=pass2){
+        alert('Password and confirm password must be same...');
+        return false
+      }
+          
+      if (new_date>cur_date){
+        alert('Invalid date of birth ');
+        return false
+          }     
+      
+      if(number.length<10){
+        alert('Mobile num must be 10 digits only...')
+        return false
+      }
+    }
+</script>
+</head>
+
+<body>
+  <div class="parallax"></div> 
+  <h3 style="position: fixed;color:white;left:9%;top:20%"><a class="btn btn-primary" href="/">Home</a></h3>
+  <!------------------------------------------------------------------------------------------------------------------------>
+  <div class=" block " >
+    <div class="title" ><h1>Registration form</h1></div><br/>
+    <div class="container" >
+      <!--------------------------------------------------------------Form-------------------------------------------------------->
+      <form method="POST"  action="{% url 'register' %}" style="padding: 5px;" onsubmit="return valid_pass()" name="form1">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form col-md-3"></div>
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control " name='First' pattern="[a-z A-Z]{4,}" placeholder="First name" >
+          </div>
+          <div class="form col-md-3"></div>
+        </div>
+
+        <div class="form-row" >
+          <div class="form col-md-3"></div>
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control" name='Last' pattern="[a-z A-Z]{4,}" placeholder="Last name" >
+          </div>
+          <div class="form col-md-3"></div>
+        </div>
+
+        <div class="form-row" >
+          <div class="form col-md-3"></div>
+          <div class="form-group col-md-6" > 
+            <input type="username" class="form-control " name="user" pattern="[a-z A-Z 0-9]{4,}" placeholder="Username" required>
+          </div>
+          <div class="form col-md-3"></div>
+        </div>
+
+        <div class="form-row" >
+          <div class="form col-md-3"></div>
+          <div class="form-group col-md-6">    
+            <input type="password" class="form-control" name="pwd1" placeholder="Password">
+          </div>
+          <div class="form col-md-3"></div>
+        </div>
+
+        <div class="form-row" >
+          <div class="form col-md-3"></div>
+          <div class="form-group col-md-6">
+            <input type="password" class="form-control" name="pwd2" placeholder="confirm Password">
+          </div>
+          <div class="form col-md-3"></div>
+        </div>
+
+        <div class="form-row" >
+          <div class="form col-md-3"></div>
+          <div class="form-group col-md-6" > 
+            <input type="email" class="form-control " name="mail" placeholder="email" required>
+          </div>
+          <div class="form col-md-3"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form col-md-3"></div>
+          <div class="form-check col-md-3 form-check-inline">
+            <input class="form-check-input " type="radio" name="sex" id="Radio1" value="option1">
+            <label class="form-check-label w-100" for="Radio1">MALE</label>
+          </div>
+          <div class="form-check col-md-3 form-check-inline">
+            <input class="form-check-input" type="radio" name="sex"  id="Radio2" value="option2">
+            <label class="form-check-label w-100" for="Radio2">FEMALE</label>
+          </div>
+          <div class="form col-md-3"></div>
+        </div><br/>
+
+        <div class="form-row">
+          <div class="form col-md-3"></div>
+          <div class="form-group col-md-6">
+            <input type="date" class="form-control" name='dob'placeholder="dob"  required>
+          </div> 
+          <div class="form col-md-3"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form col-md-3"></div>
+          <div class="form-group col-md-6">
+            <input type="number" class="form-control" name='num'placeholder="mobile" required>
+          </div>  
+          <div class="form col-md-3"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form col-md-3"></div>
+          <div class="form-group col-md-3">
+            <button type="submit" class="btn btn-danger w-100">Register</button>
+          </div>  
+          <div class="form-group col-md-3">
+            <button type="reset" class="btn btn-danger w-100">Reset</button>
+          </div>  
+          <div class="form col-md-3"></div>
+        </div>
+        
+      </form>
+      <!------------------------------------------------------------------------------------------------------------------------->
+    </div>
+  </div>
+  <!------------------------------------------------------------------Messages------------------------------------------------------------->
+    <div style="top: 40%;left:3%;position:absolute;color:red" >
+      {% for message in messages %}
+
+              {{message}}
+              {% endfor %}
+  </div>  
+
+  <div class="parallax"></div> 
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="refresh" content="30" />
+  <title>Bejj Travells</title>
+  <link rel='stylesheet' href="{% static 'bootstrap\css\bootstrap.css' %}"/>
+  <script src="{% static 'bootstrap\js\jquery.js' %}"></script>
+  <script src="{% static 'bootstrap\js\bootstrap.js' %}"  ></script>
+  <script src="{% static 'bootstrap\js\bootstrap.bundle.js' %}"></script>
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Kalam&display=swap" rel="stylesheet">
+  <style>
+    *{
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .intro{
+      font-family: 'Kalam', cursive;;
+      position: absolute;
+      width: 40%;
+      margin-top: 15%;
+      left:30%;
+      text-align: center;    
+      font-size: 20px;  
+      color: white;
+    }
+
+    .fa{
+      color:rgb(11, 219, 46);
+        
+    }
+
+    body,html{
+      height: 100%;
+    }
+        
+    .parallax {
+      background-image:  url('/static/background_images/black.jpg');
+      height: 100%; 
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;  
+    }
+      
+    .dropdown-menu a {
+      text-align: center;
+      background-color:rgb(12, 226, 77); 
+      margin-bottom: 2px;
+      font-size:20px;
+      font-weight: bolder;
+      padding: 5px;
+    }
+    
+    nav {
+      background-color: orangered;
+      font-size: 15px;
+      text-align: center;
+      font-weight: bolder;
+      }
+
+    .nav-link{  
+      border-radius: 2px; 
+    }
+
+    .nav-link:hover{
+      background-color: rgb(63, 62, 62);
+      border-radius: 5px; 
+    }
+
+    .nav-item{
+      margin:3px; 
+    }
+
+    .coupon {   
+      width: 100%;
+      height: 520px;
+      margin: 0 auto; 
+     
+    }
+      
+    .cont {
+      text-align: center;
+      padding: 2px ;
+      line-height: 30px;
+      background-color: teal;
+      height: 78px;
+    }
+      
+    .promo {
+      background: black;
+      padding: 3px;
+    }
+      
+    .expire {
+      color: white;
+    }
+
+   .offer{
+    position:absolute;width:70px;right:0;border-radius:2px;text-align: center;background-color: rgb(165, 9, 9);
+   }
+   .price{
+     color: black;
+     background-color:tan;
+     padding: 4px;
+     border-radius:2px;
+   }
+
+  </style>
+</head>
+<body >
+  <!-------------------------------------------------------------Navbar------------------------------------------------------------->
+  <nav class="navbar navbar-expand-md navbar-dark    fixed-top" > 
+    <div class="container" >
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#trg" >
+              <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class=" collapse navbar-collapse" id="trg">
+      
+          <ul class='navbar-nav'>
+            {% if user.is_authenticated %}
+            <li class="nav-item" ><div class="nav-link bg-dark"style="color: white;border-radius: 5px;color:rgb(12, 226, 77);">Hi, <b style="font-family: 'Kalam', cursive;;">{{user.first_name}} !</b> </div></li>
+            <li class="nav-item"><a class="nav-link " href="accounts/logout" style="color: white;">Logout</a></li>
+            <li class="nav-item"><a class="nav-link " href="accounts/book" style="color: white;">Book Trip</a></li>
+            {% else %}
+            <li class="nav-item "><a class="nav-link " href="accounts/register" style="color: white;">Register</a></li>
+            <li class="nav-item"><a class="nav-link " href="accounts/login" style="color: white;">Login</a></li>
+            {% endif %}
+            <li class="nav-item"><a class="nav-link " href="#" style="color: white;">Home</a></li>
+            <li class="nav-item dropdown " >      
+                <a class="nav-link dropdown-toggle" href="#" data-target="bejj"  data-toggle="dropdown"   style="color: white;">Info</a>        
+                <div class="dropdown-menu  dropdown-menu-right bg-dark " aria-labelledby="bejj" style="padding:2px;">              
+                  <a class="dropdown-item  text-dark"  href="#city" >Cities</a>
+                  <a class="dropdown-item  text-dark" href="#car_and_coupons" >Vehicles</a>
+                  <a class="dropdown-item  text-dark" href="#car_and_coupons" >Coupons</a>      
+                </div>   
+            </li>  
+          </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!------------------------------------------------------------------Introduction-------------------------------------------------------->
+  <div class="intro  " >
+
+    <h1 class="display-3 " style="color:  rgb(20, 233, 20);" >BEJJ Tourism</h1>
+    <p style="text-align:justify ;">Come and experience a new world and explore the new things that everyone should make it once in a life time.
+      so that we are offering a new travelling experience with a low budjet .you can choose the vehicle which u want,with no fuel cost.</p> 
+    <h5 style="color:rgb(20, 233, 20);font-size:22px;font-family: 'Kalam', cursive;;">Explore now<i class="fa fa-arrow-down "></i></h5>
+
+  </div>
+
+  <div class="parallax"></div>
+  <!--------------------------------------------------------------------Tourist-cities------------------------------------------------------------->
+  <div class="jumbotron jumbotron-fluid bg-dark" id=city style="margin-bottom: 0;">
+    <div class="row " >
+
+        {% for dest in dest %}
+      <div class="col-md-3">
+        {%  if  user.is_authenticated %}
+        <a   href= "{% url 'visit' dest.city_name %}" class="btn text-justify text-white">     
+        {% else %}
+        <a   class="btn text-justify text-white">
+        {% endif %}        
+          <div class="card " style="background-color:{{dest.city_color}}"> 
+            <strong class=" offer" >{% if dest.offer %}  Offer  {% endif %}</strong>    
+            <img class="card-img-top" src="{{dest.city_image.url}}" alt="Card image cap">
+                <div class="card-body text-justify ">
+                  <h5 class="card-title">{{dest.city_name}} </h5>
+                  <p class="card-text">{{dest.city_summary}}</p> 
+                  <small style=color:black  > <b class=btn  style=background-color:white> Click to explore</b>   </small><br/><br/>
+                  <p class="card-text "><small class="price" ><b>Price:  ${{dest.price}}</b>  </small></p> 
+                      
+                </div>
+          </div>
+        </a>
+      </div> 
+
+          {% endfor %}
+    </div>  
+  </div>
+  <!--------------------------------------------------------------parallax---------------------------------------------------------------------------->
+          
+
+  <h1 class="display-1" style="position: absolute;text-align:center;margin-top:12%;color:rgb(12, 226, 77);font-family:'Kalam', cursive;;" >The bejj</h1>
+  <div class="parallax" style="height: 60%; background-image:url('/static/background_images/back.jpg');"></div>
+
+  <!--------------------------------------------------------------cars---------------------------------------------------------------------------->
+  {% if user.is_authenticated %}
+  <div class="jubotron bg-dark jumbotron-fluid">
+    <div class="row "  id="car_and_coupons" style="width: 100%;">
+      <div class="display-4 text-center text-white" style="font-weight: bolder;">Cars</div>
+      <div class="col-md-8 " style="margin-top: 20px;">  
+        <div class="container" style="margin: 0px;">
+          
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol> 
+
+            <div class="carousel-inner">
+              {% for car in cars %}
+              <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                <img class="d-block w-100" src="{{car.car_image.url}}" alt="First slide" style="border:4px solid grey;">
+                <div class="carousel-caption d-none d-md-block " style="font-weight: bolder; color:gold">
+                  <h5 class="display-3 "><b>{{car.car_name}}</b></h5>
+                  <p>price: ${{car.car_rent}}/day</p>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+      
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+          </div>   
+        </div>
+      </div>
+    
+        <!-----------------------------------------------------------coupons--------------------------------------------------------------------------------->
+      <div class=" text-white col-md-4 " style="margin-top: 21px;right:0;">
+        <div class="coupon" >
+          <div style="border: 3px solid grey;">
+            <div class="cont" ><h3 style="line-height: 60px;"><b>Bonus</b></h3></div>      
+            <img src="{% static 'car_images\duster.jpg' %}" alt="Avatar" style="width:100%;">
+            <div class="cont" style="background-color:rgb(204, 13, 13)"><h2 style="line-height: 60px;"><b>20% OFF ON TRIP</b></h2></div>   
+            <div class="cont">
+              <p>Use Promo Code: <span class="promo">BOH232</span></p>
+              <p class="expire">Expires: Jan 03, 2021</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!----------------------------------------------------------------parallax---------------------------------------------------------------->
+  <h1 class="display-1" style="position: absolute;text-align:center;margin-top:12%;color:white;font-family:'Kalam', cursive;;" >Enjoy Travelling</h1>
+  <div class="parallax" style="height: 60%; background-image:url('/static/background_images/sunset.jpg');"></div>
+  {% endif %}
+  <!---------------------------------------------------------------------Contacts----------------------------------------------------------------------->
+  <div class="jumbotron jumbotron-fluid  text-white" style="margin:0;background-image:url('/static/background_images/grad1.jpg');background-size:cover;">
+    <div class="container bg-dark "   >
+      <div class="row"  >
+
+        <div class="col-md-3 text-center "  style="margin-top:40px;" >
+          <h1 ><i class='fa fa-address-book'> </i></h1>
+          <h3 style="color:rgb(11, 219, 46)"><b>Address:</b></h3>
+          <Address >
+            <strong>
+              6-10-171/A1,<br/>
+              Repalle,Andhra Pradesh<br/>
+              522265.
+            </strong>
+          </Address>
+        </div>
+
+        <div class="col-md-3 text-center" style="margin-top:40px;" >
+          <h1><i class=' fa fa-phone'></i></h1>
+          <h3  style="color:rgb(11, 219, 46)"><b>Contact:</b></h3>  
+          <strong>9490357389</strong>
+        </div>
+
+        <div class="col-md-3 text-center" style="margin-top:40px;" >
+          <h1><i class=' fa fa-envelope' aria-hidden="true"></i></h1>
+          <h3 style="color:rgb(11, 219, 46)"><b>Email:</b></h3>
+          <strong> bejjamvamsi@gmail.com</strong>
+        </div>
+
+        <div class="col-md-3 text-center"style="margin-top:40px;" >
+          <span class="display-4"><a target='_blank' href="https://www.facebook.com/vamsibejjam1234"><i class=' text-primary fa fa-facebook' aria-hidden="true"></i></a></span>
+          <span class="display-4"><a  target='_blank'href="https://www.instagram.com/bejjam_vamsi/"><i class='  text-danger fa fa-instagram' aria-hidden="true"></i></a></span>
+        </div>
+
+      </div>     
+    </div>   
+  </div>
+  <!--------------------------------------------------------------------Footer---------------------------------------------------->
+  <footer class="text-center  text-white" style="background-color: red;height:30px;line-height:30px;" >&copy;bejjam vamsi</footer>
+
+</body>
+</html>

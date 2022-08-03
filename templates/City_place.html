@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="10" />
+  <title>{{city}}</title>
+    <link rel='stylesheet' href="{% static 'bootstrap\css\bootstrap.css' %}"/>
+    <script src="{% static 'bootstrap\js\jquery.js' %}"></script>
+    <script src="{% static 'bootstrap\js\bootstrap.js' %}"  ></script>
+    <script src="{% static 'bootstrap\js\bootstrap.bundle.js' %}"></script>
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Kalam&display=swap" rel="stylesheet">
+  <style>
+    body {
+      width: 100%;
+    }
+
+    body,
+    html {
+      height: 100%;
+
+    }
+
+    .row p {
+      text-align: justify;
+    }
+
+    .parallax {
+      background-image: url('/static/background_images/black.jpg');
+      height: 100%;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+    }
+
+    .card-title,
+    h5 {
+      color: yellow;
+      text-align: center;
+    }
+    .title{
+      position:absolute;
+      top:40%;
+      left:21%;
+      width:58%;
+      padding: 3px;
+      color:white;
+      font-weight: bolder;
+      text-align: center;
+    
+     }
+     .btn{
+       width: 100px;
+     }
+  </style>
+</head>
+
+<body>
+
+  <h3 style="position: fixed;color:white;right:1%;top:10%"><a class="btn btn-primary" href="#">Top</a></h3>
+  <h3 style="position: fixed;color:white;right:1%;top:20%"><a class="btn btn-danger" href="#end">End</a></h3>
+  {% if user.is_authenticated %}
+  <h3 style="position: fixed;color:white;left:1%;top:10%"><a class="btn btn-success" href="/accounts/book">Book Trip</a></h3>
+  {% else %}
+  <h3 style="position: fixed;color:white;left:1%;top:10%"><a class="btn btn-info" href="/accounts/login">Login</a></h3>
+  {% endif %}
+  <h3 style="position: fixed;color:white;left:1%;top:20%"><a class="btn btn-warning" href="/">Home</a></h3>
+  <div class="parallax img-fluid" style="background-image: url('{{city.city_image.url}}');"></div>
+
+  <div class="container title bg-dark" > 
+    <h1 class="display-4  " style="color:white;"><b>{{city}}</b></h1>
+    <h6 style="color: gold;"><i class="fa fa-arrow-up"> </i> Here are famous  tourist places </h6>
+    <p><small >Last updated on : <b style="color:rgb(12, 226, 77);">{{city.updated_date | date:"d\t\h F Y" }}</b></small></p>
+  </div>
+  
+  {% if user.is_authenticated %}
+
+    {% for place in places %}
+    
+  <div class="card bg-dark text-white " style=" width:70%;right:15%;margin-top:5%;position:absolute;">
+    <div class="row no-gutters">
+      <div class="col-md-8">
+        <img src="{{place.place_images.url}}" class="card-img" alt="..." style="height: 90%;">
+      </div>
+      <div class="col-md-4">
+        <div class="card-body">
+          <h3 class="card-title">{{place.place_name}}  </h3>
+          <p class="card-text">{{place.place_intro}}</p>    
+          {% if not forloop.last %}  
+          <p class="card-text"><small style="color: yellow;">scroll down for next place !</small></p>
+          {% else %}
+          <p class="card-text"><small style="color: yellow;">scroll up for previous places !</small></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="parallax"></div>
+    
+      {% endfor %}
+    {% endif %}   
+  <!------------------------------------------------------------------------------------------------------------------------------------------------------>
+
+
+  
+  <!------------------------------------------------------------------------------------------------------------------------------------------------------>
+  <div class="jumbotron jumbotron-fluid  text-white"
+    style="margin:0;background-image:url('/static/background_images/grad1.jpg');background-size:cover;" id='end'>
+    <div class="container bg-dark ">
+      <div class="row">
+        <div class="col-sm-3 text-center " style="margin-top:40px;">
+          <h1><i class='fa fa-address-book'> </i></h1>
+          <h3 style="color:rgb(11, 219, 46)"><b>Address:</b></h3>
+          <Address><strong>
+              6-10-171/A1,<br />
+              Repalle,Andhra Pradesh<br />
+              522265.</strong>
+          </Address>
+        </div>
+        <div class="col-sm-3 text-center" style="margin-top:40px;">
+          <h1><i class=' fa fa-phone'></i></h1>
+          <h3 style="color:rgb(11, 219, 46)"><b>Contact:</b></h3>
+          <strong>9490357389</strong>
+        </div>
+        <div class="col-sm-3 text-center" style="margin-top:40px;">
+          <h1><i class=' fa fa-envelope' aria-hidden="true"></i></h1>
+          <h3 style="color:rgb(11, 219, 46)"><b>Email:</b></h3>
+          <strong> bejjamvamsi@gmail.com</strong>
+        </div>
+        <div class="col-sm-3 text-center" style="margin-top:40px;">
+
+          <span class="display-4"><a target='_blank' href="https://www.facebook.com/vamsibejjam1234"><i
+                class=' text-primary fa fa-facebook' aria-hidden="true"></i></a></span><br />
+          <span class="display-4"><a target='_blank' href="https://www.instagram.com/bejjam_vamsi/"><i
+                class='  text-danger fa fa-instagram' aria-hidden="true"></i></a></span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+  <footer class="text-center  text-white" style="background-color: red;height:30px;line-height:30px;" >&copy;bejjam vamsi</footer>
+  <!--------------------------------------------------------------------------------------------------------------------------------------------------->
+</body>
+
+</html>

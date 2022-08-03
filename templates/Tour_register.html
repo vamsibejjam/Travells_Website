@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  {% if not user.is_authenticated %}
+  <meta http-equiv="refresh" content="1; url=/accounts/login/" />
+  {% endif%}
+  <title>Document</title>
+  <link rel='stylesheet' href="{% static 'bootstrap\css\bootstrap.css' %}"/>
+  <script src="{% static 'bootstrap\js\jquery.js' %}"></script>
+  <script src="{% static 'bootstrap\js\bootstrap.js' %}"  ></script>
+  <script src="{% static 'bootstrap\js\bootstrap.bundle.js' %}"></script>
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Kalam&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      height: 100%;
+      
+    }
+    
+    .parallax {
+     
+      background-image: url('/static/background_images/sunset.jpg');
+      height: 100%; 
+      
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .title{
+      border: 3px solid navy;
+      color: whitesmoke;
+      text-align: center;
+      margin:0;
+      height: 80px;
+      
+      background-color:navy;
+      padding:5px;
+      border-bottom:2px solid black;
+      font-family:'Times New Roman', Times, serif;
+    }
+    
+   
+  </style>
+</head>
+
+<body >
+
+  <div style="position: fixed;right:2%;top:2%;">
+    <h1><a class="btn btn-primary" href="/" >Home</a></h1><!-----Home-->
+  </div> 
+
+  <div class=" img-fluid parallax"></div>
+
+  <div class="container" style="position: absolute; top:12%;left:3%;">
+    <div class="row">
+      <!------------------------------------------------------Form 1--------------------------------------------------------------->
+      <div class="col-7 ">
+                
+        <h2 class=" title" >Tour registration</h2>
+        <div class=" container  text-white" style=" border: 3px solid navy;border-top:0;background-color:rgb(136, 4, 4)" > 
+                    
+          <form  action="{% url 'book' %}" method="POST" style="padding: 10px;;"><br/>          
+          {% csrf_token %}
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="First">First</label>
+                <input type="text" class="form-control" name="First" placeholder="First name" value="{{user.first_name}}"  disabled>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="Last">Last</label>
+                <input type="text" class="form-control" name="Last" placeholder="Last name" value="{{user.last_name}}" disabled>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="mail">Email</label>
+                <input type="email" class="form-control" name="mail" placeholder="Email" value="{{user.email}}" disabled>
+              </div> 
+            </div>
+
+            <div class="form-group">
+              <label for="address">Home-Address</label>
+              <input type="text" class="form-control" name="address1" placeholder="Apartment, studio, or floor" autofocus>
+            </div>
+                    
+
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="address2">Pickup-Address</label>
+                <input type="text" class="form-control" name="address2" placeholder="Apartment, studio, or floor" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="phone">Mobile</label>
+                <input type="number" class="form-control" name="phone" placeholder="Mobile" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputCity">City</label>
+                <input type="text" class="form-control" name="inputCity" placeholder="city" required>
+              </div>
+              <div class="form-group col-md-5">
+                <label for="inputState">State</label>
+                <select name="inputState" class="form-control">
+                  <option >Choose...</option>
+                  <option> Andhra Pradesh</option>
+                  <option> Delhi</option>
+                  <option> Gujarat</option>
+                  <option > Maharashtra</option>
+                  <option > Orissa</option>
+                  <option > Uttarpradesh</option>
+                  <option > Madhya Pradesh</option>
+                  <option> Karnataka</option>
+                  <option > Kerala</option>
+                  <option > Telangana</option>
+                  <option>Tamilnadu</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputZip">Zip</label>
+                <input type="text" class="form-control" name="inputZip" placeholder="postal-code"> 
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-5">
+                <label for="inputcity">Travell destination</label>
+                <select name="inputcity" class="form-control" required>
+                  <option> Select Place...</option>
+                  <option> Banglore</option>
+                  <option> Chennai</option>
+                  <option > Goa</option>
+                  <option > Hyderabad</option>
+                  <option> Kerala</option>
+                  <option > Kolkata</option>
+                  <option > Mumbai</option>
+                  <option>visakhapatnam</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-5">
+                <label for="car">Select vehicle</label>
+                <select name="car" class="form-control" required>
+                  <option> select car...</option>
+                  <option> Hyundai Creta</option>
+                  <option > Hyundai I20</option>
+                  <option > Kia Carnival</option>
+                  <option> Mahindra XUV-500</option>
+                  <option > Renault Duster</option>
+                  <option > Suzuki Baleno</option>
+                  <option>Suzuki  Brezza</option>
+                  <option > suzuki Swift</option>
+                  <option> Toyota Fortuner</option>
+                  <option> Tata Strome</option> 
+                </select>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="persons">passengers</label>
+                <input type="number" class="form-control" name="persons" required >
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="travel_date">Date-of-travell</label>
+                <input type="date" class="form-control" name="travel_date"  required>
+              </div> 
+
+              <div class="form-group col-md-4">
+                <label for="to">Date-of-return</label>
+                <input type="date" class="form-control" name="to"  required>
+              </div> 
+            
+
+              <div class="form-group col-md-4">
+                <label for="code">Coupon-Code</label>
+                <input type="text" class="form-control" name="code"  >
+              </div> 
+            </div>
+
+                          
+            <div class="form-group text-warning">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                  This is to confirm that all above information is true.
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group text-warning">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                <label class="form-check-label" for="invalidCheck2">
+                  Agree to terms and conditions
+                </label>
+              </div>
+            </div>
+                          
+                
+                          
+        </div>
+        <div style="background-color: navy;text-align:center;color:white;padding:3px;"><h5>Form-1</h5></div>
+      </div>
+      <!-------------------------------------------------------------Form 2 ------------------------------------------------------->
+      <div class="col-5">
+          
+        <h2 class="title" >Payment details</h2>
+        <div class="container  text-white" style="border: 3px solid navy;border-top:0; background-color:rgb(25, 108, 218)"><br/>
+      
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="card">CARD NUMBER</label>
+              <input type="text" class="form-control" name="card" placeholder="card-number" required><span class="form-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            </div> 
+          </div>
+
+          <div class="form-row">  
+            <div class="form-group col-md-4">
+              <label for="exp">EXP MONTH</label>
+              <input type="number" class="form-control" name="exp" placeholder="Month" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="expy">EXP YEAR</label>
+              <input type="number" class="form-control" name="expy" placeholder="Year" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputcvv">CVV</label>
+              <input type="number" class="form-control" name="inputcvv" placeholder="CVV" required>
+            </div>
+          </div>
+                
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <input type="submit" class=" form-control bg-danger text-white " value="Total to pay : $142"  style="text-align:center;" disabled>
+            </div> 
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <button type="submit" class="btn btn-dark text-white" style="width: 100%;" >Submit</button>
+            </div> 
+          </div>
+            
+        </div>
+        <div style="background-color: navy;text-align:center;color:white;padding:3px;"><h5>Form-2</h5></div>
+          </form> 
+      <!------------------------------------------------------------Form Ending--------------------------------------------------------------------> 
+      </div>
+
+    </div>
+  </div>
+
+  <!-----------------------------------------------------------------Parallax----------------------------------------------------------->
+  <div class="img-fluid parallax" ></div>
+  <div style="position: absolute; font-family: 'Kalam', cursive;;color:white;left:36%;margin-top:10%;" >
+    <h1  class="display-1" >The Bejj</h1>
+  </div>
+  <div class="img-fluid parallax" ></div>
+
+
+</body>
+</html>
