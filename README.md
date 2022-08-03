@@ -1,5 +1,7 @@
 # Travells_Website
 I programmed a travelling web application to book a tour package for famous places in India. It's an interactive web application designed using both front-end and back-end technologies.
+Front-end technologies are HTML,CSS,Javascript,Bootstrap.
+Back-end technologies are Python,Django,MySQL.
 
 ![pro 1](https://user-images.githubusercontent.com/59401883/182537687-e0745b35-3058-4373-8b0e-0337288874cc.png)
 
